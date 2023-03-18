@@ -2,7 +2,7 @@ import redis from 'redis';
 import { promisify } from 'util';
 
 const RdsClient = class RedisClient {
-  Constructor() {
+  constructor() {
     this.client = redis.createClient();
     this.connected = true;
     this.client.on('connect', () => {
@@ -20,7 +20,7 @@ const RdsClient = class RedisClient {
 
   async get(key) {
     const getValue = await promisify(this.client.get).bind(this.client);
-    return await getValue(key);
+    return getValue(key);
   }
 
   async set(key, value, duration) {
