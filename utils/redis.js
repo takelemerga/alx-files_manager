@@ -20,7 +20,7 @@ const RdsClient = class RedisClient {
 
   async get(key) {
     const getValue = await promisify(this.client.get).bind(this.client);
-    return getValue(key);
+    return await getValue(key);
   }
 
   async set(key, value, duration) {
