@@ -1,13 +1,12 @@
 import redis from 'redis';
 import { promisify } from 'util';
 
-
-const rdsClient = class RedisClient{
-  constructor(){
+const RdsClient = class RedisClient {
+  Constructor() {
     this.client = redis.createClient();
     this.connected = true;
     this.client.on('connect', () => {
-      this.connected = true; 
+      this.connected = true;
     });
     this.client.on('error', (err) => {
       this.connected = false;
@@ -15,13 +14,13 @@ const rdsClient = class RedisClient{
     });
   }
 
-  isAlive(){
+  isAlive() {
     return this.connected;
   }
 
   async get(key) {
     const getValue = await promisify(this.client.get).bind(this.client);
-    return await getValue(key); 
+    return getValue(key);
   }
 
   async set(key, value, duration) {
@@ -34,5 +33,6 @@ const rdsClient = class RedisClient{
     this.client.del(key);
   }
 };
-const redisClient = new rdsClient();
-module.exports = redisClient; 
+
+const redisClient = new RdsClient();
+module.exports = redisClient;
