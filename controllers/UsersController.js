@@ -13,7 +13,7 @@ class UsersController {
     if (emailExist) return res.status(400).json({ error: 'Already exist' });
 
     const hashpwd = sha1(password);
-    const addUser = await dbClient.db.collection('users').insertOne({ email, password: hashpwd });
+    const addUser = await dbClient.database.collection('users').insertOne({ email, password: hashpwd });
     const newUser = { id: addUser.ops[0]._id, email: addUser.ops[0].email };
     return res.status(201).json(newUser);
   }
