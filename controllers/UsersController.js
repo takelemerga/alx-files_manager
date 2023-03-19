@@ -6,7 +6,7 @@ class UsersController {
     const email = req.body ? req.body.email : null;
     const password = req.body ? req.body.password : null;
 
-    const emailExist = await dbClient.usersCollection.findOne({ email });
+    const emailExist = await dbClient.db.collection.findOne({ email });
 
     if (!email) return (res.status(400).json({ error: 'Missing email' }));
     if (!password) return (res.status(400).json({ error: 'Missing password' }));
