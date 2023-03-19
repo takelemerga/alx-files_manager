@@ -15,8 +15,10 @@ router.get('/stats', (req, res) => {
 });
 
 // add a new user to database
-router.post('/users', (req, res) => {
+/* router.post('/users', (req, res) => {
   UsersController.postNew(req, res);
-});
+}); */
+
+router.post('/users', UsersController.postNew);
 
 module.exports = router;
