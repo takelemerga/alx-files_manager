@@ -45,6 +45,14 @@ class DBClient {
   }
 
   /**
+   * Retrieves a reference to the `files` collection.
+   * @returns {Promise<Collection>}
+   */
+  async filesCollection() {
+    return this.database.collection('files');
+  }
+
+  /**
    * Retrieves the number of files in the database.
    */
   async nbFiles() {
