@@ -1,5 +1,4 @@
 import mongodb from 'mongodb';
-import Collection from 'mongodb/lib/collection';
 
 class DBClient {
   constructor() {
@@ -37,7 +36,7 @@ class DBClient {
       return null;
     }
   }
-  
+
   /**
    * Retrieves a reference to the `users` collection.
    * @returns {Promise<Collection>}
