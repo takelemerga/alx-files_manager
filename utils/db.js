@@ -1,4 +1,5 @@
 import mongodb from 'mongodb';
+import Collection from 'mongodb/lib/collection';
 
 class DBClient {
   constructor() {
@@ -8,13 +9,14 @@ class DBClient {
     const url = `mongodb://${host}:${port}`;
 
     // Create Instance of MongoClient for mongodb
-    const mgClient = mongodb.MongoClient;
+    this.mgClient = mongodb.MongoClient;
     // client returned
-    mgClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
+    this.mgClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
       if (err) {
         return console.error(err);
       }
       this.database = client.db(dataBaseName);
+      this.cl = client;
       return this.database;
     });
   }
@@ -34,6 +36,14 @@ class DBClient {
       console.log('that did not go well');
       return null;
     }
+  }
+  
+  /**
+   * Retrieves a reference to the `users` collection.
+   * @returns {Promise<Collection>}
+   */
+  async usersCollection() {
+    return this.cl.db().collection('users');
   }
 
   /**
