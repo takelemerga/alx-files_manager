@@ -15,7 +15,6 @@ class DBClient {
         return console.error(err);
       }
       this.database = client.db(dataBaseName);
-      this.cl = client;
       return this.database;
     });
   }
@@ -42,7 +41,7 @@ class DBClient {
    * @returns {Promise<Collection>}
    */
   async usersCollection() {
-    return this.cl.db().collection('users');
+    return this.database.collection('users');
   }
 
   /**
